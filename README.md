@@ -17,6 +17,8 @@
 
 It goes beyond traditional code search by combining **structural parsing, semantic understanding, and contextual reasoning** to deliver **accurate, meaningful insights from your code**.
 
+Find docker image [here](https://hub.docker.com/r/omegabridge/omega-intellect).
+
 ---
 
 ## ✨ Core Capabilities (Search • Understand • Generate)
