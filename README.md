@@ -29,7 +29,8 @@ It goes beyond traditional code search by combining **structural parsing, semant
   * Classes
   * Logical units
 * Eliminates noisy, line-based chunking
-  👉 Ensures clean, meaningful context
+
+👉 Ensures clean, meaningful context
 
 ---
 
@@ -111,13 +112,14 @@ Q: How is authentication implemented?
 
 ### ✅ Requirements
 
-* PostgreSQL with `pgvector` extension
+* PostgreSQL with `pgvector` and `vectorscale` extensions
 * GitLab access token
+
 
 ---
 
-### 🔐 Environment Setup
-
+### ▶️ Run
+#### 1. Create `.env` file
 ```env
 # Database
 DATABASE_URL=postgresql://user:password@host:5432/db
@@ -144,15 +146,20 @@ ANTHROPIC_API_KEY=
 GEMINI_API_KEY=
 ```
 
----
-
-### ▶️ Run
-
+#### 2. Run using Docker image
 ```bash
-docker build -t omega-intellect .
-docker run -p 8000:8000 omega-intellect
+docker run -it --env-file .env -p 8501:8501 omegabridge/omega-intellect
 ```
 
+---
+
+#### 3. Access the application
+
+👉 Open in browser:
+
+```
+http://localhost:8501
+```
 ---
 
 ## 🧠 How It Works
@@ -184,13 +191,6 @@ OmegaIntellect:
 * 🚀 Accelerate developer onboarding
 * 🔗 Trace logic across services
 * 📚 Prepare for automated documentation (coming soon)
-
----
-
-## 🔐 Requirements
-
-* PostgreSQL (with `pgvector`)
-* GitLab repository access
 
 ---
 
