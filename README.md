@@ -124,35 +124,114 @@ Q: How is authentication implemented?
 ### ▶️ Run
 #### 1. Create `.env` file
 ```env
+# =========================
 # Database
+# =========================
 DATABASE_URL=postgresql://user:password@host:5432/db
 
+# =========================
 # GitLab Integration
+# =========================
 GITLAB_URL=https://gitlab.com
 GITLAB_TOKEN=your_gitlab_token
 
+# =========================
 # Security
-MASTER_ENCRYPTION_KEY=your_secure_key
+# =========================
+MASTER_ENCRYPTION_KEY=your_44_char_fernet_key
 
+# =========================
 # Sync Configuration
+# =========================
 SYNC_INTERVAL_HOURS=1
 
+# =========================
 # Embedding / Processing
+# =========================
 EMBEDDING_BATCH_SIZE=64
 
+# =========================
 # Chat / Context
+# =========================
 CHAT_HISTORY_LIMIT=50
 
-# Optional AI Providers (use any one or multiple)
+# =========================
+# AI Providers (Optional)
+# =========================
 OPENAI_API_KEY=
 ANTHROPIC_API_KEY=
 GEMINI_API_KEY=
 
-OPENAI_MODELS=gpt-5-20250812:GPT-5:flagship 
+# =========================
+# Model Configuration (Optional)
+# Format:
+# model_name:Display Name:type
+# =========================
+
+OPENAI_MODELS=gpt-5-20250812:GPT-5:flagship
+
 ANTHROPIC_MODELS=claude-sonnet-4-20250514:Claude Sonnet 4:flagship,claude-3-5-haiku-20241022:Claude 3.5 Haiku:fast
+
 GEMINI_MODELS=gemini-1.5-pro-latest:Gemini 1.5 Pro:flagship,gemini-1.5-flash:Gemini 1.5 Flash:fast
 ```
-**NOTE:** Here gpt-5-20250812 is model name and GPT-5:flagship is display name. Can also provide list of models with coma seperated.
+
+## 🔐 Notes
+
+### MASTER_ENCRYPTION_KEY
+ - Used to encrypt API tokens securely in the database
+ - Must be a Fernet key
+
+**Requirements:**
+ - 44-character URL-safe base64 string
+ - Ends with =
+ - Allowed characters: A-Z a-z 0-9 - _ =
+### 🤖 Model Configuration
+
+Each model entry follows this format:
+
+```text
+model_id[:Display Name][:tier][:token_limit]
+```
+
+---
+
+### 📌 Field Definitions
+
+| Field          | Required | Description                                                     |
+| -------------- | -------- | --------------------------------------------------------------- |
+| `model_id`     | ✅        | API model name (e.g., `gpt-4o`)                                 |
+| `Display Name` | Optional | UI label (defaults to `model_id`)                               |
+| `tier`         | Optional | `flagship` 🚀, `fast` ⚡, or `reasoning` 🧠 (defaults to `fast`) |
+| `token_limit`  | Optional | Context window size (defaults to `128000`)                      |
+
+---
+
+### 🧩 Examples
+
+```env
+# Full format
+OPENAI_MODELS=gpt-4o:GPT-4o:flagship:128000,gpt-4o-mini:GPT-4o Mini:fast:128000
+
+# Shorthand (Display Name = model_id)
+OPENAI_MODELS=gpt-4o:flagship,gpt-4o-mini:fast
+
+# Minimal (tier = fast, token_limit = 128000)
+OPENAI_MODELS=gpt-4o,gpt-4o-mini
+
+# Mixed providers
+GEMINI_MODELS=gemini-2.5-pro:Gemini 2.5 Pro:flagship:1000000,gemini-2.5-flash:fast
+```
+
+---
+
+### 💡 Notes
+
+* Fields are **optional from left to right** (you can skip trailing values)
+* Multiple models must be **comma-separated**
+* If `Display Name` is not provided → `model_id` is used
+* If `tier` is not provided → defaults to `fast`
+* If `token_limit` is not provided → defaults to `128000`
+
 #### 2. Run using Docker image
 ```bash
 docker run -it --env-file .env -p 8501:8501 omegabridge/omega-intellect
