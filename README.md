@@ -1,6 +1,6 @@
 # 🧠 OmegaIntellect
 
-### *Your Codebase, Fully Understood.*
+### *Your Codebase, Fully Understood By AI.*
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Status](https://img.shields.io/badge/status-active-success.svg)
