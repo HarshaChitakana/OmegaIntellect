@@ -17,7 +17,7 @@
 
 It goes beyond traditional code search by combining **structural parsing, semantic understanding, and contextual reasoning** to deliver **accurate, meaningful insights from your code**.
 
-### Find docker image [here](https://hub.docker.com/r/omegabridge/omega-intellect).
+### Find omegabridge/omega-intellect docker image [here](https://hub.docker.com/r/omegabridge/omega-intellect).
 
 ---
 
@@ -146,8 +146,12 @@ CHAT_HISTORY_LIMIT=50
 OPENAI_API_KEY=
 ANTHROPIC_API_KEY=
 GEMINI_API_KEY=
-```
 
+OPENAI_MODELS=gpt-5-20250812:GPT-5:flagship 
+ANTHROPIC_MODELS=claude-sonnet-4-20250514:Claude Sonnet 4:flagship,claude-3-5-haiku-20241022:Claude 3.5 Haiku:fast
+GEMINI_MODELS=gemini-1.5-pro-latest:Gemini 1.5 Pro:flagship,gemini-1.5-flash:Gemini 1.5 Flash:fast
+```
+**NOTE:** Here gpt-5-20250812 is model name and GPT-5:flagship is display name. Can also provide list of models with coma seperated.
 #### 2. Run using Docker image
 ```bash
 docker run -it --env-file .env -p 8501:8501 omegabridge/omega-intellect
