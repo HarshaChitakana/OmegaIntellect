@@ -2,7 +2,7 @@
 
 ### *Your Codebase, Fully Understood By AI.*
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![License](https://img.shields.io/badge/License-Proprietary-red)
 ![Status](https://img.shields.io/badge/status-active-success.svg)
 ![AI Powered](https://img.shields.io/badge/AI-powered-purple.svg)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-required-blue)
